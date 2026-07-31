@@ -35,8 +35,8 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   const index = projects.findIndex((p) => p.slug === project.slug);
-  const prev = index > 0 ? projects[index - 1] : null;
-  const next = index < projects.length - 1 ? projects[index + 1] : null;
+  const prev = index > 0 ? projects[index - 1] ?? null : null;
+  const next = index < projects.length - 1 ? projects[index + 1] ?? null : null;
 
   return (
     <>
