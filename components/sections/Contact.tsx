@@ -30,7 +30,7 @@ export function Contact() {
       <SectionEyebrow number="06" label="Contact" />
 
       <RevealText
-        text="Let's build something."
+        text="Engineering The Future."
         as="h2"
         className="font-display text-display-md font-semibold text-text text-balance"
       />

@@ -7,7 +7,7 @@ import { fadeUp, staggerContainer } from "@/animations/variants";
 
 const quickFacts = [
   { label: "CGPA", value: "9.03 / 10.0" },
-  { label: "Graduating", value: "May 2028" },
+  { label: "Graduating", value: "2028" },
   { label: "Based in", value: "Vellore, India" },
   { label: "Certified in", value: "Generative AI (IBM)" },
 ];
