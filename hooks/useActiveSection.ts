@@ -24,8 +24,9 @@ export function useActiveSection(ids: string[]) {
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visible[0]) {
-          setActiveId(visible[0].target.id);
+        const first = visible[0];
+        if (first) {
+          setActiveId(first.target.id);
         }
       },
       {

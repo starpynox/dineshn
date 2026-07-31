@@ -8,7 +8,9 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { MobileMenu } from "./MobileMenu";
 import { MagneticButton } from "@/components/cursor/MagneticButton";
 
-const sectionIds = navLinks.map((l) => l.href.split("#")[1]);
+const sectionIds = navLinks
+  .map((l) => l.href.split("#")[1])
+  .filter((id): id is string => Boolean(id));
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
