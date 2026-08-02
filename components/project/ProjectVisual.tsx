@@ -18,8 +18,10 @@ export function ProjectVisual({ slug, accentColor, className }: ProjectVisualPro
   if (slug === "medsync") return <MedSyncVisual accentColor={accentColor} className={className} />;
   if (slug === "prp-navigation") return <PRPVisual accentColor={accentColor} className={className} />;
   if (slug === "svfl") return <SVFLVisual accentColor={accentColor} className={className} />;
-  if (slug === "wardrobeos" || slug === "mess-food-calorie-tracker")
-    return <InProgressVisual accentColor={accentColor} className={className} />;
+  if (slug === "motorq-fleet-intelligence")
+    return <MotorqVisual accentColor={accentColor} className={className} />;
+  if (slug === "budget-tracker")
+    return <BudgetTrackerVisual accentColor={accentColor} className={className} />;
   return null;
 }
 
@@ -126,18 +128,135 @@ function SVFLVisual({ accentColor, className }: { accentColor: string; className
   );
 }
 
-function InProgressVisual({ accentColor, className }: { accentColor: string; className?: string }) {
+function MotorqVisual({ accentColor, className }: { accentColor: string; className?: string }) {
   return (
-    <div className={`relative flex h-full w-full items-center justify-center overflow-hidden bg-bg-elevated ${className}`}>
-      <div
-        className="absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage: `repeating-linear-gradient(135deg, ${accentColor} 0, ${accentColor} 1px, transparent 1px, transparent 14px)`,
-        }}
-      />
-      <span className="relative rounded-pill border border-border px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-text-faint">
-        In progress
-      </span>
+    <div className={`relative flex h-full w-full items-center justify-center bg-bg-elevated ${className}`}>
+      <svg viewBox="0 0 400 240" className="h-full w-full max-w-md" fill="none">
+        {/* Multiple OEM input sources — different manufacturers, different formats */}
+        {[70, 115, 160].map((y, i) => (
+          <g key={i}>
+            <rect
+              x="20"
+              y={y - 12}
+              width="44"
+              height="24"
+              rx="4"
+              stroke={accentColor}
+              strokeOpacity="0.4"
+              strokeWidth="1.5"
+            />
+            <text
+              x="42"
+              y={y + 4}
+              textAnchor="middle"
+              fontSize="9"
+              fontFamily="monospace"
+              fill={accentColor}
+              opacity="0.6"
+            >
+              {["°F", "°C", "DTC"][i]}
+            </text>
+            <motion.path
+              d={`M 64 ${y} Q 100 ${y} 130 115`}
+              stroke={accentColor}
+              strokeOpacity="0.3"
+              strokeWidth="1.2"
+              strokeDasharray="3 3"
+              initial={{ strokeDashoffset: 0 }}
+              animate={{ strokeDashoffset: -12 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear", delay: i * 0.15 }}
+            />
+          </g>
+        ))}
+
+        {/* Normalizer node — converges all formats into one schema */}
+        <rect x="130" y="95" width="50" height="40" rx="6" stroke={accentColor} strokeWidth="1.5" fill={`${accentColor}12`} />
+        <text x="155" y="119" textAnchor="middle" fontSize="8" fontFamily="monospace" fill={accentColor}>
+          NORM
+        </text>
+
+        {/* Connector to AI agent */}
+        <motion.path
+          d="M 180 115 Q 210 115 235 115"
+          stroke={accentColor}
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+          initial={{ strokeDashoffset: 0 }}
+          animate={{ strokeDashoffset: -16 }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* AI agent node — pulsing, represents active investigation */}
+        <circle cx="255" cy="115" r="20" stroke={accentColor} strokeWidth="1.5" fill={`${accentColor}1A`} />
+        <motion.circle
+          cx="255"
+          cy="115"
+          r="20"
+          stroke={accentColor}
+          strokeWidth="1"
+          fill="none"
+          animate={{ scale: [1, 1.5], opacity: [0.6, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+        />
+        <text x="255" y="119" textAnchor="middle" fontSize="8" fontFamily="monospace" fill={accentColor}>
+          AI
+        </text>
+
+        {/* Output: structured report with severity */}
+        <path d="M 275 115 Q 300 115 320 115" stroke={accentColor} strokeOpacity="0.4" strokeWidth="1.5" />
+        <rect x="320" y="80" width="60" height="70" rx="6" stroke={accentColor} strokeWidth="1.5" fill={`${accentColor}0D`} />
+        <circle cx="335" cy="96" r="4" fill={accentColor} opacity="0.8" />
+        <line x1="345" y1="96" x2="370" y2="96" stroke={accentColor} strokeOpacity="0.5" strokeWidth="1.5" />
+        <line x1="330" y1="112" x2="372" y2="112" stroke={accentColor} strokeOpacity="0.4" strokeWidth="1.5" />
+        <line x1="330" y1="124" x2="365" y2="124" stroke={accentColor} strokeOpacity="0.4" strokeWidth="1.5" />
+        <line x1="330" y1="136" x2="358" y2="136" stroke={accentColor} strokeOpacity="0.4" strokeWidth="1.5" />
+      </svg>
+    </div>
+  );
+}
+
+function BudgetTrackerVisual({ accentColor, className }: { accentColor: string; className?: string }) {
+  return (
+    <div className={`relative flex h-full w-full items-center justify-center gap-8 bg-bg-elevated ${className}`}>
+      <svg viewBox="0 0 400 240" className="h-full w-full max-w-md" fill="none">
+        {/* Donut breakdown */}
+        <g transform="translate(100,120)">
+          <circle r="55" fill="none" stroke={`${accentColor}22`} strokeWidth="18" />
+          <motion.circle
+            r="55"
+            fill="none"
+            stroke={accentColor}
+            strokeWidth="18"
+            strokeDasharray="345.6"
+            strokeDashoffset="345.6"
+            strokeLinecap="round"
+            transform="rotate(-90)"
+            initial={{ strokeDashoffset: 345.6 }}
+            animate={{ strokeDashoffset: 345.6 * (1 - 0.62) }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          />
+          <text x="0" y="6" textAnchor="middle" fontSize="16" fontFamily="monospace" fill={accentColor}>
+            62%
+          </text>
+        </g>
+
+        {/* Trend line */}
+        <g transform="translate(200,60)">
+          <line x1="0" y1="140" x2="180" y2="140" stroke={accentColor} strokeOpacity="0.2" strokeWidth="1" />
+          <motion.path
+            d="M 0 110 L 30 90 L 60 100 L 90 60 L 120 75 L 150 40 L 180 55"
+            stroke={accentColor}
+            strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.4, ease: "easeInOut" }}
+          />
+          {[0, 30, 60, 90, 120, 150, 180].map((x, i) => {
+            const ys = [110, 90, 100, 60, 75, 40, 55];
+            return <circle key={i} cx={x} cy={ys[i]} r="2.5" fill={accentColor} />;
+          })}
+        </g>
+      </svg>
     </div>
   );
 }

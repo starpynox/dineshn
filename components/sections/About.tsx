@@ -7,7 +7,7 @@ import { fadeUp, staggerContainer } from "@/animations/variants";
 
 const quickFacts = [
   { label: "CGPA", value: "9.03 / 10.0" },
-  { label: "Graduating", value: "2028" },
+  { label: "Graduating", value: "May 2028" },
   { label: "Based in", value: "Vellore, India" },
   { label: "Certified in", value: "Generative AI (IBM)" },
 ];
@@ -22,7 +22,7 @@ export function About() {
         <SectionEyebrow number="01" label="About" />
 
         <RevealText
-          text="Building things that people use, not just things that compile."
+          text="I build things people use, not just things that compile."
           as="h2"
           className="font-display text-display-md font-semibold text-text text-balance"
         />
@@ -36,7 +36,7 @@ export function About() {
         >
           <motion.p variants={fadeUp}>
             Most of what I&apos;ve built so far has had a real person on the
-            other end of it; a research park building that needed a way for
+            other end of it — a research park building that needed a way for
             visitors to find a room, a family retail business that needed a
             storefront online, a team at a hackathon that needed a working
             product by morning. That constraint, building for someone who
@@ -47,7 +47,7 @@ export function About() {
             I&apos;m a Computer Science student at VIT, currently maintaining
             a 9.03 CGPA while spending most of my time outside class on
             full-stack and AI-integrated projects. On team projects I&apos;ve
-            gravitated toward the integration work, the part where a React
+            gravitated toward the integration work — the part where a React
             frontend actually has to agree with a Flask API on what data
             looks like, under a deadline, with someone else&apos;s code on
             the other side.
